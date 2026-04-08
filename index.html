@@ -1,0 +1,264 @@
+<!DOCTYPE html> <!-- Informa ao navegador que o documento está em HTML5 -->
+<html lang="pt-BR"> <!-- Início do documento HTML e define o idioma como português do Brasil -->
+<head> <!-- Início da área de configurações da página -->
+  <meta charset="UTF-8"> <!-- Define a codificação de caracteres para aceitar acentos e caracteres especiais -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Faz o layout se adaptar corretamente em celulares e tablets -->
+  <title>Sabor em Casa | Receitas</title> <!-- Título que aparece na aba do navegador -->
+  <meta name="description" content="Site de receitas com busca, filtros, detalhes e espaço para vídeo em cada receita."> <!-- Descrição curta da página -->
+  <link rel="stylesheet" href="style.css"> <!-- Conecta o arquivo CSS externo a esta página -->
+</head> <!-- Fim da área de configurações da página -->
+
+<body> <!-- Início do corpo visível do site -->
+  <header class="topbar"> <!-- Cabeçalho principal do site -->
+    <div class="container topbar-inner"> <!-- Caixa interna do cabeçalho para alinhar os elementos -->
+      <a href="#inicio" class="logo"> <!-- Link da logo que leva para a seção inicial -->
+        <div class="logo-mark">🍽️</div> <!-- Ícone visual da logo -->
+        <span>Sabor em Casa</span> <!-- Nome do site -->
+      </a> <!-- Fim do link da logo -->
+
+      <nav class="nav"> <!-- Menu de navegação principal -->
+        <a href="#receitas">Receitas</a> <!-- Link para a seção de receitas -->
+        <a href="#destaque">Destaque</a> <!-- Link para a seção de destaque -->
+        <a href="#videos">Vídeos</a> <!-- Link para a seção de vídeos -->
+        <a href="#newsletter">Novidades</a> <!-- Link para a seção de novidades -->
+      </nav> <!-- Fim do menu de navegação -->
+
+      <button class="btn btn-primary" id="publishButton">Publicar Receita</button> <!-- Botão que abre a janela para cadastrar nova receita -->
+    </div> <!-- Fim da caixa interna do cabeçalho -->
+  </header> <!-- Fim do cabeçalho principal -->
+
+  <main> <!-- Início do conteúdo principal do site -->
+    <section class="hero" id="inicio"> <!-- Seção principal de apresentação do site -->
+      <div class="container hero-grid"> <!-- Grade que divide o hero em duas colunas -->
+        <div class="hero-copy"> <!-- Coluna da esquerda com os textos principais -->
+          <div class="eyebrow">🔥 Receitas deliciosas para o seu dia a dia</div> <!-- Pequeno selo acima do título -->
+
+          <h1> <!-- Título principal da página -->
+            Descubra receitas que <span>encantam no sabor</span> <!-- Parte do texto com destaque visual -->
+            e deixam sua mesa ainda mais especial. <!-- Continuação do título -->
+          </h1> <!-- Fim do título principal -->
+
+          <p> <!-- Texto de apoio do bloco principal -->
+            Explore pratos completos, sobremesas, lanches e opções leves. <!-- Primeira linha do texto -->
+            Cada receita possui imagem, descrição, modo de preparo e espaço para vídeo. <!-- Segunda linha do texto -->
+          </p> <!-- Fim do texto de apoio -->
+
+          <div class="hero-actions"> <!-- Área dos botões principais da capa -->
+            <a href="#receitas" class="btn btn-primary">Explorar receitas</a> <!-- Botão/link que leva até a seção de receitas -->
+            <a href="#newsletter" class="btn btn-secondary">Receber novidades</a> <!-- Botão/link que leva até a seção de novidades -->
+          </div> <!-- Fim da área dos botões principais -->
+
+          <div class="mini-stats"> <!-- Área com pequenos cartões de estatísticas -->
+            <div class="stats-card"> <!-- Primeiro cartão de estatística -->
+              <strong>+120</strong> <!-- Número em destaque -->
+              <span>Receitas populares</span> <!-- Descrição do número -->
+            </div> <!-- Fim do primeiro cartão -->
+
+            <div class="stats-card"> <!-- Segundo cartão de estatística -->
+              <strong>+45</strong> <!-- Número em destaque -->
+              <span>Vídeos culinários</span> <!-- Descrição do número -->
+            </div> <!-- Fim do segundo cartão -->
+
+            <div class="stats-card"> <!-- Terceiro cartão de estatística -->
+              <strong>4.9★</strong> <!-- Número em destaque -->
+              <span>Avaliação dos leitores</span> <!-- Descrição do número -->
+            </div> <!-- Fim do terceiro cartão -->
+          </div> <!-- Fim da área de estatísticas -->
+        </div> <!-- Fim da coluna de textos -->
+
+        <div class="hero-visual"> <!-- Coluna da direita com imagem e destaque -->
+          <div class="hero-image"></div> <!-- Bloco visual com imagem de fundo -->
+
+          <div class="hero-bottom"> <!-- Bloco inferior da imagem com informações da receita destaque -->
+            <h3>Receita em destaque da semana</h3> <!-- Título do destaque -->
+            <p> <!-- Texto da receita em destaque -->
+              Lasanha cremosa da casa, com molho encorpado, queijo gratinado <!-- Primeira linha -->
+              e preparo perfeito para um almoço especial em família. <!-- Segunda linha -->
+            </p> <!-- Fim do texto da receita em destaque -->
+
+            <div class="chips"> <!-- Área com etiquetas curtas -->
+              <span class="chip">Massas</span> <!-- Etiqueta da categoria -->
+              <span class="chip">Almoço</span> <!-- Etiqueta do tipo de refeição -->
+              <span class="chip">Receita da semana</span> <!-- Etiqueta do destaque -->
+              <span class="chip">Fácil de seguir</span> <!-- Etiqueta de facilidade -->
+            </div> <!-- Fim da área de etiquetas -->
+          </div> <!-- Fim do bloco inferior da imagem -->
+        </div> <!-- Fim da coluna visual -->
+      </div> <!-- Fim da grade do hero -->
+    </section> <!-- Fim da seção principal -->
+
+    <section class="search-area"> <!-- Seção da busca e dos filtros -->
+      <div class="container"> <!-- Caixa central da área de busca -->
+        <div class="search-panel"> <!-- Painel que contém busca, filtros e botão -->
+          <div class="field"> <!-- Caixa visual do campo de busca -->
+            <input type="text" id="searchInput" placeholder="Busque por nome da receita..."> <!-- Campo para o usuário digitar o nome da receita -->
+          </div> <!-- Fim da caixa do campo de busca -->
+
+          <div class="field"> <!-- Caixa visual do filtro por categoria -->
+            <select id="categoryFilter"> <!-- Lista de seleção de categorias -->
+              <option value="todos">Todas as categorias</option> <!-- Opção para mostrar todas -->
+              <option value="Massas">Massas</option> <!-- Opção da categoria massas -->
+              <option value="Sobremesas">Sobremesas</option> <!-- Opção da categoria sobremesas -->
+              <option value="Saudáveis">Saudáveis</option> <!-- Opção da categoria saudáveis -->
+              <option value="Lanches">Lanches</option> <!-- Opção da categoria lanches -->
+            </select> <!-- Fim da lista de categorias -->
+          </div> <!-- Fim da caixa do filtro por categoria -->
+
+          <div class="field"> <!-- Caixa visual do filtro por tempo -->
+            <select id="timeFilter"> <!-- Lista de seleção do tempo -->
+              <option value="todos">Qualquer tempo</option> <!-- Opção para mostrar todos os tempos -->
+              <option value="rapido">Até 30 min</option> <!-- Opção de receitas rápidas -->
+              <option value="medio">31 a 60 min</option> <!-- Opção de receitas médias -->
+              <option value="longo">Acima de 60 min</option> <!-- Opção de receitas longas -->
+            </select> <!-- Fim da lista de tempos -->
+          </div> <!-- Fim da caixa do filtro por tempo -->
+
+          <button class="btn btn-primary" id="clearFilters">Limpar</button> <!-- Botão que limpa a busca e os filtros -->
+        </div> <!-- Fim do painel de busca -->
+      </div> <!-- Fim da caixa central da busca -->
+    </section> <!-- Fim da seção da busca -->
+
+    <section id="receitas"> <!-- Seção principal das receitas -->
+      <div class="container"> <!-- Caixa central da seção de receitas -->
+        <div class="section-head"> <!-- Cabeçalho da seção -->
+          <div> <!-- Agrupamento do título e texto -->
+            <h2>Receitas em destaque</h2> <!-- Título da seção -->
+            <p> <!-- Texto de apoio da seção -->
+              Escolha uma receita para ver os ingredientes, o modo de preparo, <!-- Primeira linha -->
+              o tempo necessário e o espaço reservado para vídeo. <!-- Segunda linha -->
+            </p> <!-- Fim do texto de apoio -->
+          </div> <!-- Fim do agrupamento -->
+        </div> <!-- Fim do cabeçalho da seção -->
+
+        <div class="empty-state" id="emptyState"> <!-- Mensagem exibida quando nenhuma receita é encontrada -->
+          <h3>Nenhuma receita encontrada</h3> <!-- Título da mensagem vazia -->
+          <p>Ajuste os filtros ou faça outra busca.</p> <!-- Texto da mensagem vazia -->
+        </div> <!-- Fim da mensagem vazia -->
+
+        <div class="recipe-grid" id="recipeGrid"></div> <!-- Área onde o JavaScript vai inserir os cartões das receitas -->
+      </div> <!-- Fim da caixa central da seção de receitas -->
+    </section> <!-- Fim da seção de receitas -->
+
+    <section class="featured-wrap" id="destaque"> <!-- Seção especial de destaque -->
+      <div class="container"> <!-- Caixa central da seção de destaque -->
+        <div class="featured"> <!-- Grade com imagem e texto -->
+          <div class="featured-image"></div> <!-- Bloco da imagem de fundo -->
+
+          <div class="featured-copy"> <!-- Bloco do texto da seção -->
+            <div class="eyebrow">⭐ Receita especial</div> <!-- Pequeno selo da seção -->
+            <h3>Pratos para impressionar em qualquer ocasião</h3> <!-- Título da seção -->
+            <p> <!-- Texto de apoio -->
+              Reúna opções de almoço, jantar, sobremesas e lanches com apresentação <!-- Primeira linha -->
+              bonita e preparo explicado de forma simples. <!-- Segunda linha -->
+            </p> <!-- Fim do texto de apoio -->
+
+            <div class="chips"> <!-- Área de etiquetas -->
+              <span class="chip">Receitas completas</span> <!-- Etiqueta 1 -->
+              <span class="chip">Passo a passo</span> <!-- Etiqueta 2 -->
+              <span class="chip">Vídeos de apoio</span> <!-- Etiqueta 3 -->
+            </div> <!-- Fim das etiquetas -->
+
+            <a href="#receitas" class="btn btn-primary">Ver receitas</a> <!-- Botão/link para voltar à seção de receitas -->
+          </div> <!-- Fim do bloco de texto -->
+        </div> <!-- Fim da grade da seção destaque -->
+      </div> <!-- Fim da caixa central da seção -->
+    </section> <!-- Fim da seção destaque -->
+
+    <section id="videos"> <!-- Seção que apresenta a ideia dos vídeos -->
+      <div class="container"> <!-- Caixa central da seção -->
+        <div class="section-head"> <!-- Cabeçalho da seção -->
+          <div> <!-- Agrupamento do título e texto -->
+            <h2>Vídeos das receitas</h2> <!-- Título da seção -->
+            <p> <!-- Texto explicativo -->
+              Cada card já possui uma área preparada para exibir vídeo do preparo, <!-- Primeira linha -->
+              tutorial do prato ou dica culinária relacionada. <!-- Segunda linha -->
+            </p> <!-- Fim do texto explicativo -->
+          </div> <!-- Fim do agrupamento -->
+        </div> <!-- Fim do cabeçalho da seção -->
+      </div> <!-- Fim da caixa central da seção -->
+    </section> <!-- Fim da seção vídeos -->
+
+    <section id="newsletter" class="container"> <!-- Seção de cadastro de e-mail -->
+      <div class="newsletter"> <!-- Caixa visual principal da newsletter -->
+        <div> <!-- Bloco textual da newsletter -->
+          <div class="eyebrow">📩 Receba novidades</div> <!-- Pequeno selo da seção -->
+          <h3>Receba receitas novas e dicas de cozinha</h3> <!-- Título da seção -->
+          <p> <!-- Texto da newsletter -->
+            Cadastre seu e-mail para acompanhar novos pratos, sobremesas, <!-- Primeira linha -->
+            lanches e receitas especiais. <!-- Segunda linha -->
+          </p> <!-- Fim do texto da newsletter -->
+        </div> <!-- Fim do bloco textual -->
+
+        <form class="newsletter-form" id="newsletterForm"> <!-- Formulário de captura de e-mail -->
+          <input type="email" id="emailInput" placeholder="Digite seu melhor e-mail" required> <!-- Campo de digitação do e-mail -->
+          <button class="btn btn-primary" type="submit">Cadastrar</button> <!-- Botão para enviar o formulário -->
+        </form> <!-- Fim do formulário -->
+      </div> <!-- Fim da caixa visual da newsletter -->
+    </section> <!-- Fim da seção newsletter -->
+  </main> <!-- Fim do conteúdo principal -->
+
+  <section class="modal" id="recipeModal"> <!-- Janela modal que mostra os detalhes completos da receita -->
+    <div class="modal-content"> <!-- Caixa interna da modal -->
+      <button class="modal-close" id="closeModal">×</button> <!-- Botão para fechar a modal -->
+
+      <img id="modalImage" class="modal-image" src="" alt="Receita"> <!-- Imagem da receita aberta -->
+
+      <div class="modal-body"> <!-- Corpo interno da modal -->
+        <span class="modal-category" id="modalCategory"></span> <!-- Categoria da receita -->
+        <h2 id="modalTitle"></h2> <!-- Título da receita -->
+        <div class="modal-meta" id="modalMeta"></div> <!-- Meta informações da receita -->
+        <p class="modal-description" id="modalDescription"></p> <!-- Descrição detalhada da receita -->
+
+        <h3>Ingredientes</h3> <!-- Subtítulo da lista de ingredientes -->
+        <ul id="modalIngredients" class="modal-list"></ul> <!-- Lista de ingredientes preenchida pelo JavaScript -->
+
+        <h3>Modo de preparo</h3> <!-- Subtítulo da lista de preparo -->
+        <ol id="modalSteps" class="modal-list"></ol> <!-- Lista numerada de passos preenchida pelo JavaScript -->
+
+        <div class="modal-video"> <!-- Área reservada para vídeo da receita -->
+          <strong>Espaço reservado para vídeo</strong> <!-- Título do espaço de vídeo -->
+          <p>Insira aqui o vídeo da receita ou o tutorial completo.</p> <!-- Texto explicativo do espaço de vídeo -->
+        </div> <!-- Fim da área de vídeo -->
+      </div> <!-- Fim do corpo da modal -->
+    </div> <!-- Fim da caixa interna da modal -->
+  </section> <!-- Fim da modal da receita -->
+
+  <section class="modal" id="publishModal"> <!-- Janela modal para cadastrar nova receita -->
+    <div class="modal-content publish-content"> <!-- Caixa interna da modal de publicação -->
+      <button class="modal-close" id="closePublishModal">×</button> <!-- Botão para fechar a modal -->
+
+      <div class="modal-body"> <!-- Corpo da modal -->
+        <span class="modal-category">Nova receita</span> <!-- Rótulo da modal -->
+        <h2>Publicar receita</h2> <!-- Título da modal -->
+
+        <form id="publishForm" class="publish-form"> <!-- Formulário para criar nova receita -->
+          <input type="text" id="newTitle" placeholder="Nome da receita" required> <!-- Campo do nome da receita -->
+          <select id="newCategory" required> <!-- Campo da categoria -->
+            <option value="">Selecione a categoria</option> <!-- Opção inicial vazia -->
+            <option value="Massas">Massas</option> <!-- Opção massas -->
+            <option value="Sobremesas">Sobremesas</option> <!-- Opção sobremesas -->
+            <option value="Saudáveis">Saudáveis</option> <!-- Opção saudáveis -->
+            <option value="Lanches">Lanches</option> <!-- Opção lanches -->
+          </select> <!-- Fim do campo da categoria -->
+          <input type="number" id="newTime" placeholder="Tempo em minutos" required> <!-- Campo do tempo de preparo -->
+          <input type="text" id="newLevel" placeholder="Nível de dificuldade" required> <!-- Campo do nível de dificuldade -->
+          <input type="text" id="newImage" placeholder="URL da imagem" required> <!-- Campo da imagem da receita -->
+          <textarea id="newDescription" placeholder="Descrição da receita" rows="4" required></textarea> <!-- Campo da descrição -->
+          <textarea id="newIngredients" placeholder="Ingredientes, um por linha" rows="6" required></textarea> <!-- Campo dos ingredientes -->
+          <textarea id="newSteps" placeholder="Modo de preparo, um passo por linha" rows="6" required></textarea> <!-- Campo do modo de preparo -->
+          <button type="submit" class="btn btn-primary">Salvar receita</button> <!-- Botão para salvar a nova receita -->
+        </form> <!-- Fim do formulário -->
+      </div> <!-- Fim do corpo da modal -->
+    </div> <!-- Fim da caixa interna da modal -->
+  </section> <!-- Fim da modal de publicação -->
+
+  <footer> <!-- Rodapé do site -->
+    <div class="container footer-inner"> <!-- Caixa interna do rodapé -->
+      <p>© 2026 Sabor em Casa. Receitas para todos os momentos.</p> <!-- Texto do rodapé -->
+      <p>HTML • CSS • JavaScript</p> <!-- Tecnologias usadas -->
+    </div> <!-- Fim da caixa interna do rodapé -->
+  </footer> <!-- Fim do rodapé -->
+
+  <script src="script.js"></script> <!-- Conecta o arquivo JavaScript externo -->
+</body> <!-- Fim do corpo da página -->
+</html> <!-- Fim do documento HTML -->

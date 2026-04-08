@@ -1,0 +1,732 @@
+:root { /* Cria variáveis CSS reutilizáveis para cores, tamanhos e sombras */
+  --card: rgba(255, 255, 255, 0.9); /* Cor de fundo semitransparente usada nos cartões */
+  --text: #2e1d13; /* Cor principal dos textos */
+  --muted: #6e5647; /* Cor dos textos secundários */
+  --primary: #ff6b35; /* Cor principal de destaque */
+  --primary-dark: #e25421; /* Versão mais escura da cor principal */
+  --secondary: #ffb703; /* Cor secundária usada em detalhes */
+  --accent: #7a4e2d; /* Cor de apoio para títulos e etiquetas */
+  --line: rgba(122, 78, 45, 0.12); /* Cor suave para bordas */
+  --shadow: 0 18px 45px rgba(73, 38, 16, 0.12); /* Sombra padrão usada no projeto */
+  --radius-xl: 28px; /* Arredondamento grande */
+  --radius-md: 16px; /* Arredondamento médio */
+  --max: 1240px; /* Largura máxima do conteúdo central */
+} /* Fecha o bloco :root */
+
+* { /* Seleciona todos os elementos da página */
+  margin: 0; /* Remove a margem padrão */
+  padding: 0; /* Remove o preenchimento padrão */
+  box-sizing: border-box; /* Faz largura e altura incluírem borda e padding */
+} /* Fecha o seletor universal */
+
+html { /* Seleciona a tag html */
+  scroll-behavior: smooth; /* Faz a rolagem para âncoras ocorrer de forma suave */
+} /* Fecha a regra do html */
+
+body { /* Seleciona o corpo inteiro da página */
+  font-family: Arial, Helvetica, sans-serif; /* Define a fonte principal */
+  background: radial-gradient(circle at top left, #ffe6c7 0%, transparent 22%), radial-gradient(circle at top right, #ffd7b8 0%, transparent 18%), linear-gradient(180deg, #fff8f1 0%, #fff3e6 40%, #fffaf5 100%); /* Cria o fundo com degradês */
+  color: var(--text); /* Aplica a cor principal de texto */
+  min-height: 100vh; /* Faz o corpo ocupar no mínimo a altura toda da tela */
+  line-height: 1.5; /* Define a altura entre linhas */
+} /* Fecha a regra do body */
+
+img { /* Seleciona todas as imagens */
+  max-width: 100%; /* Faz a imagem nunca ultrapassar a largura do elemento pai */
+  display: block; /* Remove espaços indesejados abaixo da imagem */
+} /* Fecha a regra das imagens */
+
+a { /* Seleciona todos os links */
+  text-decoration: none; /* Remove o sublinhado padrão */
+  color: inherit; /* Faz o link herdar a cor do elemento pai */
+} /* Fecha a regra dos links */
+
+button,
+input,
+select,
+textarea { /* Seleciona botões, inputs, selects e textareas */
+  font: inherit; /* Faz esses elementos herdarem a mesma fonte do restante da página */
+} /* Fecha a regra dos elementos de formulário */
+
+.container { /* Classe usada para centralizar o conteúdo */
+  width: min(92%, var(--max)); /* Usa 92% da tela, limitado ao valor máximo */
+  margin: 0 auto; /* Centraliza horizontalmente */
+} /* Fecha a regra da classe container */
+
+.topbar { /* Cabeçalho fixo superior */
+  position: sticky; /* Mantém o cabeçalho fixo ao rolar a página */
+  top: 0; /* Cola o cabeçalho no topo */
+  z-index: 1000; /* Garante que ele fique acima de outros elementos */
+  backdrop-filter: blur(14px); /* Aplica efeito de vidro fosco */
+  background: rgba(255, 250, 245, 0.8); /* Define um fundo semitransparente */
+  border-bottom: 1px solid rgba(122, 78, 45, 0.08); /* Adiciona uma linha inferior suave */
+} /* Fecha a regra do topo */
+
+.topbar-inner { /* Caixa interna do cabeçalho */
+  display: flex; /* Usa flexbox para alinhar os itens */
+  align-items: center; /* Alinha os itens verticalmente no centro */
+  justify-content: space-between; /* Coloca espaço entre logo, menu e botão */
+  gap: 20px; /* Define espaço entre os itens */
+  padding: 16px 0; /* Adiciona espaço interno em cima e embaixo */
+} /* Fecha a regra da caixa interna do topo */
+
+.logo { /* Link da logo */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Alinha o ícone e o texto verticalmente */
+  gap: 12px; /* Espaço entre ícone e nome */
+  font-weight: 800; /* Deixa a fonte mais forte */
+  font-size: 1.25rem; /* Define o tamanho da fonte */
+} /* Fecha a regra da logo */
+
+.logo-mark { /* Ícone da logo */
+  width: 46px; /* Largura do ícone */
+  height: 46px; /* Altura do ícone */
+  border-radius: 16px; /* Arredonda as bordas */
+  display: grid; /* Usa grid para centralizar o conteúdo */
+  place-items: center; /* Centraliza o emoji na horizontal e vertical */
+  background: linear-gradient(135deg, var(--primary), var(--secondary)); /* Fundo em degradê */
+  color: white; /* Cor do emoji */
+  box-shadow: var(--shadow); /* Aplica sombra */
+  font-size: 1.4rem; /* Tamanho do emoji */
+} /* Fecha a regra do ícone da logo */
+
+.nav { /* Menu de navegação */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centraliza verticalmente */
+  gap: 22px; /* Espaço entre os links */
+  color: var(--muted); /* Cor padrão dos links */
+  font-weight: 700; /* Peso da fonte */
+  font-size: 0.96rem; /* Tamanho da fonte */
+} /* Fecha a regra do menu */
+
+.nav a:hover { /* Quando o mouse passa sobre um link do menu */
+  color: var(--primary); /* Muda a cor do link */
+} /* Fecha a regra hover do menu */
+
+.btn { /* Classe base de botão */
+  border: none; /* Remove a borda padrão */
+  cursor: pointer; /* Mostra a mãozinha ao passar o mouse */
+  border-radius: 999px; /* Deixa o botão bem arredondado */
+  font-weight: 800; /* Texto mais forte */
+  transition: 0.25s ease; /* Suaviza as animações */
+} /* Fecha a regra base dos botões */
+
+.btn-primary { /* Botão principal */
+  background: linear-gradient(135deg, var(--primary), #ff7a45); /* Fundo em degradê */
+  color: white; /* Cor do texto */
+  padding: 14px 22px; /* Espaçamento interno */
+  box-shadow: 0 12px 25px rgba(255, 107, 53, 0.28); /* Sombra do botão */
+} /* Fecha a regra do botão principal */
+
+.btn-primary:hover { /* Quando o mouse passa sobre o botão principal */
+  transform: translateY(-2px); /* Move o botão levemente para cima */
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary)); /* Escurece o degradê */
+} /* Fecha a regra hover do botão principal */
+
+.btn-secondary { /* Botão secundário */
+  background: white; /* Fundo branco */
+  color: var(--accent); /* Cor do texto */
+  border: 1px solid var(--line); /* Borda suave */
+  padding: 14px 22px; /* Espaçamento interno */
+} /* Fecha a regra do botão secundário */
+
+.btn-secondary:hover { /* Quando o mouse passa sobre o botão secundário */
+  transform: translateY(-2px); /* Move o botão levemente para cima */
+  border-color: rgba(255, 107, 53, 0.24); /* Destaca a borda */
+  color: var(--primary); /* Muda a cor do texto */
+} /* Fecha a regra hover do botão secundário */
+
+.hero { /* Seção principal do topo */
+  padding: 42px 0 28px; /* Espaçamento externo superior e inferior */
+} /* Fecha a regra da seção hero */
+
+.hero-grid { /* Grade que divide a seção principal em duas colunas */
+  display: grid; /* Usa grid layout */
+  grid-template-columns: 1.15fr 0.85fr; /* Define a proporção das colunas */
+  gap: 28px; /* Espaço entre as colunas */
+  align-items: stretch; /* Faz os blocos esticarem na altura */
+} /* Fecha a regra da grade do hero */
+
+.hero-copy,
+.hero-visual,
+.search-panel,
+.recipe-card,
+.featured,
+.newsletter,
+.stats-card,
+.modal-content { /* Grupo de elementos com aparência de cartão */
+  background: var(--card); /* Fundo semitransparente */
+  border: 1px solid rgba(255, 255, 255, 0.55); /* Borda clara */
+  box-shadow: var(--shadow); /* Sombra padrão */
+  backdrop-filter: blur(10px); /* Efeito de vidro */
+} /* Fecha o grupo de cartões */
+
+.hero-copy { /* Bloco de texto do hero */
+  border-radius: var(--radius-xl); /* Bordas arredondadas */
+  padding: 52px; /* Espaçamento interno */
+  position: relative; /* Permite posicionar elementos internos de forma absoluta */
+  overflow: hidden; /* Esconde o que ultrapassar as bordas */
+} /* Fecha a regra do bloco de texto */
+
+.hero-copy::before { /* Elemento decorativo antes do conteúdo */
+  content: ""; /* Cria o pseudo-elemento */
+  position: absolute; /* Posiciona livremente dentro do bloco */
+  inset: auto -100px -110px auto; /* Posiciona no canto inferior direito */
+  width: 260px; /* Largura do efeito */
+  height: 260px; /* Altura do efeito */
+  background: radial-gradient(circle, rgba(255, 183, 3, 0.28), transparent 68%); /* Cria o círculo decorativo */
+} /* Fecha a regra do pseudo-elemento */
+
+.eyebrow { /* Pequeno selo acima dos títulos */
+  display: inline-flex; /* Usa flexbox em linha */
+  align-items: center; /* Alinha conteúdo verticalmente */
+  gap: 8px; /* Espaço entre ícone e texto */
+  background: #fff0e3; /* Fundo claro */
+  color: var(--primary-dark); /* Cor do texto */
+  border: 1px solid rgba(255, 107, 53, 0.14); /* Borda leve */
+  padding: 10px 16px; /* Espaçamento interno */
+  border-radius: 999px; /* Deixa o selo arredondado */
+  font-size: 0.86rem; /* Tamanho da fonte */
+  font-weight: 800; /* Peso da fonte */
+  margin-bottom: 18px; /* Espaço abaixo do selo */
+} /* Fecha a regra do selo */
+
+.hero h1 { /* Título principal do hero */
+  font-size: clamp(2.3rem, 4vw, 4.4rem); /* Tamanho responsivo do título */
+  line-height: 1.02; /* Altura entre linhas bem compacta */
+  margin-bottom: 18px; /* Espaço abaixo do título */
+  max-width: 700px; /* Limita a largura do texto */
+} /* Fecha a regra do h1 */
+
+.hero h1 span { /* Parte destacada do título */
+  color: var(--primary); /* Aplica a cor de destaque */
+} /* Fecha a regra do span do h1 */
+
+.hero p { /* Parágrafos dentro da seção hero */
+  color: var(--muted); /* Cor secundária */
+  font-size: 1.08rem; /* Tamanho do texto */
+  max-width: 620px; /* Limita a largura */
+  margin-bottom: 28px; /* Espaço inferior */
+} /* Fecha a regra dos parágrafos do hero */
+
+.hero-actions { /* Área dos botões da capa */
+  display: flex; /* Usa flexbox */
+  flex-wrap: wrap; /* Permite quebrar linha */
+  gap: 14px; /* Espaço entre os botões */
+  margin-bottom: 32px; /* Espaço abaixo */
+} /* Fecha a regra da área dos botões */
+
+.mini-stats { /* Grade dos cartões de estatísticas */
+  display: grid; /* Usa grid */
+  grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas iguais */
+  gap: 16px; /* Espaço entre os cartões */
+} /* Fecha a regra das estatísticas */
+
+.stats-card { /* Cartão individual de estatística */
+  border-radius: var(--radius-md); /* Bordas arredondadas */
+  padding: 18px; /* Espaçamento interno */
+} /* Fecha a regra do cartão */
+
+.stats-card strong { /* Número principal do cartão */
+  display: block; /* Faz ocupar a linha toda */
+  font-size: 1.45rem; /* Tamanho do número */
+  margin-bottom: 6px; /* Espaço abaixo do número */
+} /* Fecha a regra do strong */
+
+.stats-card span { /* Texto explicativo do cartão */
+  color: var(--muted); /* Cor secundária */
+  font-size: 0.94rem; /* Tamanho da fonte */
+} /* Fecha a regra do span */
+
+.hero-visual { /* Bloco visual do lado direito */
+  border-radius: var(--radius-xl); /* Bordas arredondadas */
+  overflow: hidden; /* Esconde excessos */
+  display: grid; /* Usa grid */
+  grid-template-rows: 1fr auto; /* Divide em imagem em cima e conteúdo embaixo */
+  min-height: 100%; /* Garante altura completa */
+} /* Fecha a regra do bloco visual */
+
+.hero-image { /* Área da imagem principal */
+  min-height: 380px; /* Altura mínima da imagem */
+  background: linear-gradient(rgba(41, 20, 9, 0.12), rgba(41, 20, 9, 0.12)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80') center/cover; /* Fundo com imagem e sombra leve */
+} /* Fecha a regra da imagem do hero */
+
+.hero-bottom { /* Parte de baixo do bloco visual */
+  padding: 24px; /* Espaçamento interno */
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98)); /* Fundo claro em degradê */
+  display: grid; /* Usa grid */
+  gap: 10px; /* Espaço entre os itens */
+} /* Fecha a regra da parte inferior do hero */
+
+.hero-bottom h3 { /* Título da parte inferior do hero */
+  font-size: 1.25rem; /* Tamanho da fonte */
+} /* Fecha a regra do h3 */
+
+.hero-bottom p { /* Parágrafo da parte inferior do hero */
+  color: var(--muted); /* Cor secundária */
+  margin-bottom: 0; /* Remove margem inferior */
+} /* Fecha a regra do parágrafo */
+
+.chips { /* Área das etiquetas pequenas */
+  display: flex; /* Usa flexbox */
+  flex-wrap: wrap; /* Permite quebrar linha */
+  gap: 10px; /* Espaço entre as etiquetas */
+  margin-top: 6px; /* Espaço acima */
+} /* Fecha a regra da área de chips */
+
+.chip { /* Etiqueta individual */
+  padding: 9px 14px; /* Espaçamento interno */
+  border-radius: 999px; /* Bordas completamente arredondadas */
+  background: #fff3e5; /* Fundo claro */
+  color: var(--accent); /* Cor do texto */
+  font-size: 0.85rem; /* Tamanho da fonte */
+  font-weight: 800; /* Peso da fonte */
+  border: 1px solid rgba(255, 183, 3, 0.2); /* Borda suave */
+} /* Fecha a regra do chip */
+
+.search-area { /* Seção da busca */
+  padding: 10px 0 26px; /* Espaçamento acima e abaixo */
+} /* Fecha a regra da área de busca */
+
+.search-panel { /* Painel da busca e filtros */
+  border-radius: var(--radius-xl); /* Bordas arredondadas */
+  padding: 26px; /* Espaçamento interno */
+  display: grid; /* Usa grid */
+  grid-template-columns: 2fr 1fr 1fr auto; /* Define colunas de busca, filtros e botão */
+  gap: 14px; /* Espaço entre colunas */
+  align-items: center; /* Alinha os itens verticalmente */
+} /* Fecha a regra do painel de busca */
+
+.field { /* Caixa visual que envolve input e select */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centraliza verticalmente */
+  background: white; /* Fundo branco */
+  border: 1px solid var(--line); /* Borda suave */
+  border-radius: 18px; /* Bordas arredondadas */
+  padding: 0 14px; /* Espaçamento lateral interno */
+  min-height: 58px; /* Altura mínima */
+} /* Fecha a regra da field */
+
+.field input,
+.field select { /* Input e select dentro da field */
+  width: 100%; /* Faz ocupar toda a largura */
+  height: 56px; /* Define a altura */
+  border: none; /* Remove a borda padrão */
+  outline: none; /* Remove o contorno ao clicar */
+  background: transparent; /* Fundo transparente */
+  font-size: 1rem; /* Tamanho da fonte */
+  color: var(--text); /* Cor do texto */
+} /* Fecha a regra de input e select */
+
+.section-head { /* Cabeçalho de seção */
+  display: flex; /* Usa flexbox */
+  align-items: end; /* Alinha os itens pela base */
+  justify-content: space-between; /* Coloca espaço entre os lados */
+  gap: 20px; /* Espaço entre os blocos */
+  margin: 18px 0 20px; /* Margem superior e inferior */
+} /* Fecha a regra do cabeçalho de seção */
+
+.section-head h2 { /* Título de seção */
+  font-size: clamp(1.7rem, 2.4vw, 2.6rem); /* Tamanho responsivo */
+  margin-bottom: 6px; /* Espaço abaixo */
+} /* Fecha a regra do h2 */
+
+.section-head p { /* Parágrafo de apoio da seção */
+  color: var(--muted); /* Cor secundária */
+  max-width: 720px; /* Largura máxima do texto */
+} /* Fecha a regra do parágrafo */
+
+.recipe-grid { /* Grade das receitas */
+  display: grid; /* Usa grid */
+  grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas iguais */
+  gap: 22px; /* Espaço entre os cartões */
+  padding-bottom: 24px; /* Espaço inferior */
+} /* Fecha a regra da grade de receitas */
+
+.recipe-card { /* Cartão individual da receita */
+  border-radius: 26px; /* Bordas arredondadas */
+  overflow: hidden; /* Esconde conteúdo que sair das bordas */
+  transition: transform 0.28s ease, box-shadow 0.28s ease; /* Suaviza hover */
+  display: flex; /* Usa flexbox */
+  flex-direction: column; /* Organiza os itens em coluna */
+} /* Fecha a regra do cartão */
+
+.recipe-card:hover { /* Quando o mouse passa sobre o cartão */
+  transform: translateY(-6px); /* Levanta o cartão */
+  box-shadow: 0 24px 40px rgba(73, 38, 16, 0.16); /* Aumenta a sombra */
+} /* Fecha a regra hover do cartão */
+
+.recipe-thumb { /* Parte da imagem do cartão */
+  position: relative; /* Permite posicionar a etiqueta dentro */
+  height: 230px; /* Altura da imagem */
+  overflow: hidden; /* Esconde excessos */
+} /* Fecha a regra da miniatura */
+
+.recipe-thumb img { /* Imagem interna da miniatura */
+  width: 100%; /* Ocupa toda a largura */
+  height: 100%; /* Ocupa toda a altura */
+  object-fit: cover; /* Faz a imagem preencher a área sem distorcer */
+} /* Fecha a regra da imagem da receita */
+
+.recipe-tag { /* Etiqueta de categoria sobre a imagem */
+  position: absolute; /* Posiciona sobre a imagem */
+  top: 16px; /* Distância do topo */
+  left: 16px; /* Distância da esquerda */
+  background: rgba(255, 255, 255, 0.92); /* Fundo claro */
+  color: var(--accent); /* Cor do texto */
+  padding: 8px 12px; /* Espaçamento interno */
+  border-radius: 999px; /* Bordas arredondadas */
+  font-size: 0.82rem; /* Tamanho da fonte */
+  font-weight: 800; /* Peso da fonte */
+} /* Fecha a regra da etiqueta */
+
+.recipe-body { /* Corpo interno do cartão */
+  padding: 22px; /* Espaçamento interno */
+  display: grid; /* Usa grid */
+  gap: 14px; /* Espaço entre elementos */
+  flex: 1; /* Faz essa área crescer para preencher o cartão */
+} /* Fecha a regra do corpo do cartão */
+
+.recipe-meta { /* Linha com meta informações da receita */
+  display: flex; /* Usa flexbox */
+  flex-wrap: wrap; /* Permite quebrar linha */
+  gap: 10px; /* Espaço entre itens */
+  color: var(--muted); /* Cor secundária */
+  font-size: 0.9rem; /* Tamanho da fonte */
+  font-weight: 700; /* Peso da fonte */
+} /* Fecha a regra do meta */
+
+.recipe-title { /* Título do cartão da receita */
+  font-size: 1.3rem; /* Tamanho da fonte */
+  line-height: 1.2; /* Altura entre linhas */
+} /* Fecha a regra do título */
+
+.recipe-desc { /* Descrição curta da receita */
+  color: var(--muted); /* Cor secundária */
+  font-size: 0.96rem; /* Tamanho da fonte */
+} /* Fecha a regra da descrição */
+
+.video-placeholder { /* Bloco reservado para vídeo dentro do cartão */
+  border: 1.5px dashed rgba(255, 107, 53, 0.28); /* Borda pontilhada */
+  background: linear-gradient(135deg, #fff8ef, #fff2df); /* Fundo em degradê suave */
+  border-radius: 18px; /* Bordas arredondadas */
+  min-height: 130px; /* Altura mínima */
+  display: grid; /* Usa grid */
+  place-items: center; /* Centraliza o conteúdo */
+  text-align: center; /* Centraliza o texto */
+  padding: 18px; /* Espaçamento interno */
+  color: var(--accent); /* Cor do texto */
+} /* Fecha a regra do espaço de vídeo */
+
+.video-placeholder strong { /* Título dentro do bloco de vídeo */
+  display: block; /* Faz ocupar uma linha */
+  font-size: 1rem; /* Tamanho da fonte */
+  margin-bottom: 6px; /* Espaço abaixo */
+} /* Fecha a regra do título do vídeo */
+
+.recipe-footer { /* Rodapé do cartão */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Coloca um item em cada lado */
+  gap: 12px; /* Espaço entre os itens */
+  margin-top: 2px; /* Pequeno espaço acima */
+} /* Fecha a regra do rodapé do cartão */
+
+.link-btn { /* Link “ver receita completa” */
+  color: var(--primary); /* Cor de destaque */
+  font-weight: 800; /* Peso da fonte */
+} /* Fecha a regra do link botão */
+
+.fav-btn { /* Botão de favorito */
+  width: 46px; /* Largura do botão */
+  height: 46px; /* Altura do botão */
+  border-radius: 14px; /* Bordas arredondadas */
+  border: 1px solid var(--line); /* Borda suave */
+  background: white; /* Fundo branco */
+  cursor: pointer; /* Mãozinha ao passar o mouse */
+  font-size: 1.2rem; /* Tamanho do coração */
+  transition: 0.25s ease; /* Suaviza as mudanças */
+} /* Fecha a regra do botão favorito */
+
+.fav-btn:hover,
+.fav-btn.active { /* Hover e estado ativo do botão favorito */
+  background: #fff0eb; /* Fundo levemente rosado */
+  border-color: rgba(255, 107, 53, 0.22); /* Destaca a borda */
+  transform: scale(1.05); /* Aumenta levemente o tamanho */
+} /* Fecha a regra do botão favorito em hover/ativo */
+
+.featured-wrap { /* Área externa da seção destaque */
+  padding: 30px 0; /* Espaço acima e abaixo */
+} /* Fecha a regra da área destaque */
+
+.featured { /* Grade interna da seção destaque */
+  border-radius: 30px; /* Bordas arredondadas */
+  display: grid; /* Usa grid */
+  grid-template-columns: 1fr 1fr; /* Divide em duas colunas */
+  overflow: hidden; /* Esconde excessos */
+} /* Fecha a regra da grade destaque */
+
+.featured-image { /* Imagem da seção destaque */
+  min-height: 360px; /* Altura mínima */
+  background: linear-gradient(rgba(36, 19, 10, 0.18), rgba(36, 19, 10, 0.18)), url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80') center/cover; /* Fundo com imagem */
+} /* Fecha a regra da imagem destaque */
+
+.featured-copy { /* Bloco de texto da seção destaque */
+  padding: 40px; /* Espaçamento interno */
+  display: grid; /* Usa grid */
+  align-content: center; /* Centraliza o conteúdo na vertical */
+  gap: 16px; /* Espaço entre os elementos */
+} /* Fecha a regra do texto destaque */
+
+.featured-copy h3 { /* Título da seção destaque */
+  font-size: clamp(1.8rem, 2.6vw, 3rem); /* Tamanho responsivo */
+  line-height: 1.1; /* Altura entre linhas */
+} /* Fecha a regra do h3 destaque */
+
+.featured-copy p { /* Parágrafo da seção destaque */
+  color: var(--muted); /* Cor secundária */
+  font-size: 1rem; /* Tamanho da fonte */
+} /* Fecha a regra do parágrafo destaque */
+
+.newsletter { /* Caixa principal da newsletter */
+  margin: 14px 0 50px; /* Margens externas */
+  border-radius: 30px; /* Bordas arredondadas */
+  padding: 34px; /* Espaçamento interno */
+  display: grid; /* Usa grid */
+  grid-template-columns: 1.2fr 1fr; /* Define duas colunas */
+  gap: 22px; /* Espaço entre colunas */
+  align-items: center; /* Centraliza verticalmente */
+} /* Fecha a regra da newsletter */
+
+.newsletter h3 { /* Título da newsletter */
+  font-size: clamp(1.5rem, 2vw, 2.2rem); /* Tamanho responsivo */
+  margin-bottom: 10px; /* Espaço abaixo */
+} /* Fecha a regra do título da newsletter */
+
+.newsletter p { /* Parágrafo da newsletter */
+  color: var(--muted); /* Cor secundária */
+} /* Fecha a regra do texto da newsletter */
+
+.newsletter-form { /* Formulário da newsletter */
+  display: grid; /* Usa grid */
+  grid-template-columns: 1fr auto; /* Campo grande e botão ao lado */
+  gap: 12px; /* Espaço entre os elementos */
+} /* Fecha a regra do formulário da newsletter */
+
+.newsletter-form input { /* Campo de e-mail da newsletter */
+  width: 100%; /* Ocupa toda a largura disponível */
+  min-height: 58px; /* Altura mínima */
+  border-radius: 18px; /* Bordas arredondadas */
+  border: 1px solid var(--line); /* Borda suave */
+  padding: 0 16px; /* Espaço interno lateral */
+  font-size: 1rem; /* Tamanho da fonte */
+  outline: none; /* Remove contorno padrão */
+  background: white; /* Fundo branco */
+} /* Fecha a regra do input da newsletter */
+
+footer { /* Rodapé do site */
+  padding: 18px 0 38px; /* Espaçamento interno */
+  color: var(--muted); /* Cor do texto */
+} /* Fecha a regra do rodapé */
+
+.footer-inner { /* Caixa interna do rodapé */
+  display: flex; /* Usa flexbox */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: space-between; /* Um conteúdo em cada lado */
+  gap: 20px; /* Espaço entre os itens */
+  border-top: 1px solid rgba(122, 78, 45, 0.08); /* Linha superior */
+  padding-top: 22px; /* Espaço acima do conteúdo */
+  flex-wrap: wrap; /* Permite quebrar linha */
+} /* Fecha a regra da caixa do rodapé */
+
+.empty-state { /* Bloco exibido quando não há resultados */
+  display: none; /* Fica oculto por padrão */
+  text-align: center; /* Centraliza o texto */
+  background: rgba(255, 255, 255, 0.82); /* Fundo claro */
+  border-radius: 24px; /* Bordas arredondadas */
+  padding: 40px 20px; /* Espaçamento interno */
+  color: var(--muted); /* Cor do texto */
+  box-shadow: var(--shadow); /* Sombra padrão */
+  margin-bottom: 24px; /* Espaço inferior */
+} /* Fecha a regra do estado vazio */
+
+.empty-state.show { /* Quando a classe show é adicionada pelo JavaScript */
+  display: block; /* O bloco passa a aparecer */
+} /* Fecha a regra do estado vazio visível */
+
+.modal { /* Fundo escuro da janela modal */
+  position: fixed; /* Fixa na tela */
+  inset: 0; /* Ocupa toda a tela */
+  background: rgba(20, 10, 5, 0.55); /* Fundo escuro transparente */
+  display: none; /* Fica escondida por padrão */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  padding: 20px; /* Espaço nas bordas da tela */
+  z-index: 2000; /* Fica acima de quase tudo */
+} /* Fecha a regra da modal */
+
+.modal.show { /* Quando a modal recebe a classe show */
+  display: flex; /* A modal passa a aparecer */
+} /* Fecha a regra da modal visível */
+
+.modal-content { /* Caixa principal da modal */
+  width: min(900px, 100%); /* Largura máxima de 900px */
+  max-height: 90vh; /* Altura máxima de 90% da tela */
+  overflow-y: auto; /* Ativa rolagem vertical se necessário */
+  border-radius: 24px; /* Bordas arredondadas */
+  position: relative; /* Permite posicionar o botão fechar */
+} /* Fecha a regra da caixa da modal */
+
+.publish-content { /* Versão menor da modal de publicação */
+  width: min(700px, 100%); /* Limita a largura a 700px */
+} /* Fecha a regra da modal de publicação */
+
+.modal-close { /* Botão de fechar a modal */
+  position: absolute; /* Posiciona dentro da modal */
+  top: 14px; /* Distância do topo */
+  right: 14px; /* Distância da direita */
+  width: 42px; /* Largura do botão */
+  height: 42px; /* Altura do botão */
+  border: none; /* Remove borda */
+  border-radius: 50%; /* Deixa redondo */
+  background: white; /* Fundo branco */
+  font-size: 1.5rem; /* Tamanho do X */
+  cursor: pointer; /* Mãozinha ao passar o mouse */
+  z-index: 3; /* Garante que fique acima do restante */
+} /* Fecha a regra do botão fechar */
+
+.modal-image { /* Imagem grande da receita na modal */
+  width: 100%; /* Ocupa toda a largura */
+  height: 320px; /* Altura fixa */
+  object-fit: cover; /* Preenche a área sem distorcer */
+} /* Fecha a regra da imagem da modal */
+
+.modal-body { /* Corpo interno da modal */
+  padding: 28px; /* Espaçamento interno */
+} /* Fecha a regra do corpo da modal */
+
+.modal-category { /* Etiqueta da categoria dentro da modal */
+  display: inline-block; /* Permite controlar tamanho e padding */
+  padding: 8px 12px; /* Espaçamento interno */
+  border-radius: 999px; /* Bordas arredondadas */
+  background: #fff0e3; /* Fundo claro */
+  color: var(--primary-dark); /* Cor do texto */
+  font-weight: 800; /* Peso da fonte */
+  margin-bottom: 12px; /* Espaço abaixo */
+} /* Fecha a regra da categoria da modal */
+
+.modal-body h2 { /* Título principal dentro da modal */
+  margin-bottom: 12px; /* Espaço abaixo */
+  font-size: 2rem; /* Tamanho da fonte */
+} /* Fecha a regra do h2 da modal */
+
+.modal-meta { /* Meta informações da receita na modal */
+  color: var(--muted); /* Cor secundária */
+  font-weight: 700; /* Peso da fonte */
+  margin-bottom: 16px; /* Espaço abaixo */
+} /* Fecha a regra das metas da modal */
+
+.modal-description { /* Descrição da receita na modal */
+  color: var(--muted); /* Cor secundária */
+  margin-bottom: 20px; /* Espaço abaixo */
+} /* Fecha a regra da descrição da modal */
+
+.modal-body h3 { /* Subtítulos dentro da modal */
+  margin: 18px 0 10px; /* Margem superior e inferior */
+} /* Fecha a regra dos h3 da modal */
+
+.modal-list { /* Lista de ingredientes e preparo */
+  padding-left: 22px; /* Recuo da lista */
+} /* Fecha a regra da lista da modal */
+
+.modal-list li { /* Itens da lista */
+  margin-bottom: 8px; /* Espaço entre itens */
+} /* Fecha a regra dos itens da lista */
+
+.modal-video { /* Área reservada para vídeo dentro da modal */
+  margin-top: 24px; /* Espaço acima */
+  border: 1.5px dashed rgba(255, 107, 53, 0.28); /* Borda pontilhada */
+  background: linear-gradient(135deg, #fff8ef, #fff2df); /* Fundo suave */
+  border-radius: 18px; /* Bordas arredondadas */
+  min-height: 120px; /* Altura mínima */
+  display: grid; /* Usa grid */
+  place-items: center; /* Centraliza o conteúdo */
+  text-align: center; /* Centraliza o texto */
+  padding: 18px; /* Espaçamento interno */
+  color: var(--accent); /* Cor do texto */
+} /* Fecha a regra da área de vídeo da modal */
+
+.publish-form { /* Formulário da modal de publicação */
+  display: grid; /* Usa grid */
+  gap: 14px; /* Espaço entre os campos */
+} /* Fecha a regra do formulário de publicação */
+
+.publish-form input,
+.publish-form select,
+.publish-form textarea { /* Campos do formulário de publicação */
+  width: 100%; /* Ocupam toda a largura */
+  border: 1px solid var(--line); /* Borda suave */
+  border-radius: 14px; /* Bordas arredondadas */
+  padding: 14px 16px; /* Espaçamento interno */
+  background: white; /* Fundo branco */
+  outline: none; /* Remove contorno padrão */
+} /* Fecha a regra dos campos do formulário */
+
+.publish-form textarea { /* Campo textarea do formulário */
+  resize: vertical; /* Permite redimensionar apenas verticalmente */
+} /* Fecha a regra do textarea */
+
+@media (max-width: 1100px) { /* Regras para telas médias */
+  .hero-grid,
+  .featured,
+  .newsletter { /* Seleciona os grids principais */
+    grid-template-columns: 1fr; /* Faz cada bloco virar uma coluna só */
+  } /* Fecha a regra dos grids principais */
+
+  .search-panel { /* Painel de busca em tela média */
+    grid-template-columns: 1fr 1fr; /* Reduz para duas colunas */
+  } /* Fecha a regra do search-panel */
+
+  .recipe-grid { /* Grade de receitas em tela média */
+    grid-template-columns: repeat(2, 1fr); /* Mostra 2 cartões por linha */
+  } /* Fecha a regra da grade de receitas */
+} /* Fecha o media query de 1100px */
+
+@media (max-width: 760px) { /* Regras para telas pequenas */
+  .topbar-inner,
+  .nav,
+  .hero-actions,
+  .footer-inner { /* Seleciona áreas organizadas com flexbox */
+    flex-direction: column; /* Empilha os elementos */
+    align-items: stretch; /* Faz os itens ocuparem a largura */
+  } /* Fecha a regra dos elementos flex em celular */
+
+  .hero-copy { /* Bloco de texto principal em celular */
+    padding: 30px 24px; /* Reduz o espaçamento interno */
+  } /* Fecha a regra do hero-copy */
+
+  .mini-stats,
+  .search-panel,
+  .newsletter-form,
+  .recipe-grid { /* Seleciona grades importantes */
+    grid-template-columns: 1fr; /* Faz tudo virar uma coluna */
+  } /* Fecha a regra das grades em celular */
+
+  .section-head { /* Cabeçalho das seções em celular */
+    align-items: start; /* Alinha no início */
+    flex-direction: column; /* Empilha os elementos */
+  } /* Fecha a regra do cabeçalho em celular */
+
+  .featured-copy,
+  .newsletter,
+  .modal-body { /* Seleciona blocos de conteúdo */
+    padding: 24px; /* Reduz o padding */
+  } /* Fecha a regra dos blocos em celular */
+
+  .hero-image,
+  .featured-image,
+  .modal-image { /* Seleciona as imagens maiores */
+    min-height: 280px; /* Define altura mínima */
+    height: 280px; /* Define altura fixa */
+  } /* Fecha a regra das imagens em celular */
+} /* Fecha o media query de 760px */
