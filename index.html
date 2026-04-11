@@ -22,9 +22,17 @@
         <a href="#videos">Vídeos</a> <!-- Link para a seção de vídeos -->
         <a href="#newsletter">Novidades</a> <!-- Link para a seção de novidades -->
       </nav> <!-- Fim do menu de navegação -->
+<div id="loginArea" class="login-area">
 
-      <button class="btn btn-primary" id="publishButton">Publicar Receita</button> <!-- Botão que abre a janela para cadastrar nova receita -->
-    </div> <!-- Fim da caixa interna do cabeçalho -->
+  <input type="email" id="email" placeholder="Email" class="login-input">
+  <input type="password" id="senha" placeholder="Senha" class="login-input">
+
+  <button id="loginBtn" class="btn-primary small">Entrar</button>
+  <button id="logoutBtn" class="btn-secondary small">Sair</button>
+
+  <button id="publishButton" class="btn-primary">Publicar Receita</button>
+
+</div>
   </header> <!-- Fim do cabeçalho principal -->
 
   <main> <!-- Início do conteúdo principal do site -->
@@ -242,7 +250,8 @@
           </select> <!-- Fim do campo da categoria -->
           <input type="number" id="newTime" placeholder="Tempo em minutos" required> <!-- Campo do tempo de preparo -->
           <input type="text" id="newLevel" placeholder="Nível de dificuldade" required> <!-- Campo do nível de dificuldade -->
-          <input type="text" id="newImage" placeholder="URL da imagem" required> <!-- Campo da imagem da receita -->
+          <input type="file" id="newImage" accept="image/*" required>
+          <input type="text" id="newVideo" placeholder="URL do vídeo (YouTube opcional)">
           <textarea id="newDescription" placeholder="Descrição da receita" rows="4" required></textarea> <!-- Campo da descrição -->
           <textarea id="newIngredients" placeholder="Ingredientes, um por linha" rows="6" required></textarea> <!-- Campo dos ingredientes -->
           <textarea id="newSteps" placeholder="Modo de preparo, um passo por linha" rows="6" required></textarea> <!-- Campo do modo de preparo -->
@@ -258,7 +267,7 @@
       <p>HTML • CSS • JavaScript</p> <!-- Tecnologias usadas -->
     </div> <!-- Fim da caixa interna do rodapé -->
   </footer> <!-- Fim do rodapé -->
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="script.js"></script> <!-- Conecta o arquivo JavaScript externo -->
 </body> <!-- Fim do corpo da página -->
 </html> <!-- Fim do documento HTML -->
