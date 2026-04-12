@@ -910,3 +910,9 @@ body.logado #publishButton {
   height: 100%;
   border: none;
 }
+.turma-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}

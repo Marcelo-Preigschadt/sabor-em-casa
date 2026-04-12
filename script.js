@@ -125,39 +125,79 @@ async function uploadImagem(file) {
 // =========================================
 async function carregarReceitas() {
   const { data } = await supabase.from("receitas").select("*");
+
   grid.innerHTML = "";
 
+  // 🔥 AGRUPA POR TURMA
+  const grupos = {};
+
   for (let r of data) {
-    const card = document.createElement("div");
-    card.classList.add("recipe-card");
+    const turma = r.turma || "Sem turma";
 
-    card.innerHTML = `
-      <img src="${r.imagem}">
-      <h3>${r.titulo}</h3>
-      <p>${r.descricao}</p>
-      <button class="ver">Ver</button>
-      <button class="admin editar">Editar</button>
-      <button class="admin excluir">Excluir</button>
-      <button class="admin semana">⭐</button>
-    `;
+    if (!grupos[turma]) {
+      grupos[turma] = [];
+    }
 
-    card.querySelector(".ver").onclick = () => abrirModal(r);
-    card.querySelector(".editar").onclick = () => abrirEditar(r);
-    card.querySelector(".excluir").onclick = async () => {
-      await supabase.from("receitas").delete().eq("id", r.id);
-      carregarReceitas();
-    };
-
-    card.querySelector(".semana").onclick = async () => {
-      await supabase.from("receitas").update({ destaque_semana: false });
-      await supabase.from("receitas")
-        .update({ destaque_semana: true })
-        .eq("id", r.id);
-      carregarSemana();
-    };
-
-    grid.appendChild(card);
+    grupos[turma].push(r);
   }
+
+  // 🔥 RENDERIZA POR TURMA
+  for (let turma in grupos) {
+
+    // título da turma (só aparece se tiver receitas)
+    const titulo = document.createElement("h2");
+    titulo.innerText = "Turma " + turma;
+    titulo.style.margin = "20px 0 10px";
+    titulo.style.gridColumn = "1 / -1"; // 🔥 ESSENCIAL
+    grid.appendChild(titulo);
+
+    // container da turma
+    const container = document.createElement("div");
+    container.classList.add("turma-grid");
+
+    for (let r of grupos[turma]) {
+
+      const card = document.createElement("div");
+      card.classList.add("recipe-card");
+
+      card.innerHTML = `
+        <img src="${r.imagem}">
+        <h3>${r.titulo}</h3>
+        <p>${r.descricao}</p>
+
+        <p style="font-size:12px;color:#666;">
+          👤 ${r.autor || "Aluno"} — Turma ${r.turma || "-"}
+        </p>
+
+        <button class="ver">Ver</button>
+        <button class="admin editar">Editar</button>
+        <button class="admin excluir">Excluir</button>
+        <button class="admin semana">⭐</button>
+      `;
+
+      // 🔥 MANTÉM TODAS TUAS FUNÇÕES
+      card.querySelector(".ver").onclick = () => abrirModal(r);
+      card.querySelector(".editar").onclick = () => abrirEditar(r);
+
+      card.querySelector(".excluir").onclick = async () => {
+        await supabase.from("receitas").delete().eq("id", r.id);
+        carregarReceitas();
+      };
+
+      card.querySelector(".semana").onclick = async () => {
+        await supabase.from("receitas").update({ destaque_semana: false });
+        await supabase.from("receitas")
+          .update({ destaque_semana: true })
+          .eq("id", r.id);
+        carregarSemana();
+      };
+
+      container.appendChild(card);
+    }
+
+    grid.appendChild(container);
+  }
+
   atualizarUI();
 }
 
@@ -251,7 +291,9 @@ publishForm.addEventListener("submit", async (e) => {
     descricao: newDescription.value,
     video: newVideo.value,
     ingredientes: newIngredients.value,
-    modo_preparo: newSteps.value
+    modo_preparo: newSteps.value,
+    autor: newAuthor.value,
+    turma: newClass.value
   };
 
   // 🔥 só adiciona imagem se existir (não sobrescreve no update)
