@@ -172,6 +172,8 @@ function abrirEditar(r) {
   document.getElementById("newLevel").value = r.nivel;
   document.getElementById("newDescription").value = r.descricao;
   document.getElementById("newVideo").value = r.video;
+  document.getElementById("newIngredients").value = r.ingredientes || "";
+  document.getElementById("newSteps").value = r.modo_preparo || "";
   publishModal.classList.add("show");
 }
 
@@ -182,7 +184,17 @@ function abrirModal(r) {
   document.getElementById("modalTitle").innerText = r.titulo;
   document.getElementById("modalDescription").innerText = r.descricao;
   document.getElementById("modalImage").src = r.imagem;
+  document.getElementById("modalIngredients").innerHTML =
+  (r.ingredientes || "")
+    .split("\n")
+    .map(i => `<li>${i}</li>`)
+    .join("");
 
+document.getElementById("modalSteps").innerHTML =
+  (r.modo_preparo || "")
+    .split("\n")
+    .map((p, i) => `<li>${i + 1}. ${p}</li>`)
+    .join("");
   const videoArea = document.querySelector(".modal-video");
   const embed = converterYouTube(r.video);
 
@@ -222,10 +234,12 @@ function abrirModal(r) {
 // =========================================
 publishForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const file = document.getElementById("newImage").files[0];
   let imagem = null;
 
-  if (file) {
+  // só faz upload se realmente tiver imagem nova
+  if (file && file.size > 0) {
     imagem = await uploadImagem(file);
   }
 
@@ -235,23 +249,33 @@ publishForm.addEventListener("submit", async (e) => {
     tempo: newTime.value,
     nivel: newLevel.value,
     descricao: newDescription.value,
-    video: newVideo.value
+    video: newVideo.value,
+    ingredientes: newIngredients.value,
+    modo_preparo: newSteps.value
   };
 
-  if (imagem) dados.imagem = imagem;
+  // 🔥 só adiciona imagem se existir (não sobrescreve no update)
+  if (imagem !== null) {
+    dados.imagem = imagem;
+  }
 
   if (editandoId) {
-    await supabase.from("receitas").update(dados).eq("id", editandoId);
+    await supabase
+      .from("receitas")
+      .update(dados)
+      .eq("id", editandoId);
   } else {
-    await supabase.from("receitas").insert([dados]);
+    await supabase
+      .from("receitas")
+      .insert([dados]);
   }
 
   editandoId = null;
   publishForm.reset();
   publishModal.classList.remove("show");
+
   carregarReceitas();
 });
-
 // =========================================
 // DESTAQUE
 // =========================================

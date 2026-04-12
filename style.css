@@ -222,6 +222,9 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
   gap: 16px; /* Espaço entre os cartões */
 } /* Fecha a regra das estatísticas */
 
+.card {
+  overflow: hidden;
+}
 .stats-card { /* Cartão individual de estatística */
   border-radius: var(--radius-md); /* Bordas arredondadas */
   padding: 18px; /* Espaçamento interno */
@@ -247,8 +250,15 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
 } /* Fecha a regra do bloco visual */
 
 .hero-image { /* Área da imagem principal */
-  min-height: 380px; /* Altura mínima da imagem */
   background: linear-gradient(rgba(41, 20, 9, 0.12), rgba(41, 20, 9, 0.12)), url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80') center/cover; /* Fundo com imagem e sombra leve */
+  width: 100%;
+  height: 100%;
+  background-size: cover;   /* MOSTRA TODA IMAGEM */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #eee; /* evita fundo feio */
+  border-radius: 16px;
+
 } /* Fecha a regra da imagem do hero */
 
 .hero-bottom { /* Parte de baixo do bloco visual */
@@ -335,12 +345,30 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
   color: var(--muted); /* Cor secundária */
   max-width: 720px; /* Largura máxima do texto */
 } /* Fecha a regra do parágrafo */
+.recipe-grid .card {
+  overflow: hidden;
+  border-radius: 16px;
+}
 
+/* qualquer imagem dentro do card */
+/* ===== IMAGEM PADRÃO DOS CARDS ===== */
+.recipe-thumb {
+  height: 220px;
+  overflow: hidden;
+}
+
+.recipe-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* mantém padrão bonito */
+  display: block;
+}
 .recipe-grid { /* Grade das receitas */
   display: grid; /* Usa grid */
   grid-template-columns: repeat(3, 1fr); /* Cria 3 colunas iguais */
   gap: 22px; /* Espaço entre os cartões */
   padding-bottom: 24px; /* Espaço inferior */
+  
 } /* Fecha a regra da grade de receitas */
 
 .recipe-card { /* Cartão individual da receita */
@@ -349,6 +377,7 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
   transition: transform 0.28s ease, box-shadow 0.28s ease; /* Suaviza hover */
   display: flex; /* Usa flexbox */
   flex-direction: column; /* Organiza os itens em coluna */
+  
 } /* Fecha a regra do cartão */
 
 .recipe-card:hover { /* Quando o mouse passa sobre o cartão */
@@ -357,15 +386,18 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
 } /* Fecha a regra hover do cartão */
 
 .recipe-thumb { /* Parte da imagem do cartão */
-  position: relative; /* Permite posicionar a etiqueta dentro */
-  height: 230px; /* Altura da imagem */
-  overflow: hidden; /* Esconde excessos */
+   width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+
 } /* Fecha a regra da miniatura */
 
 .recipe-thumb img { /* Imagem interna da miniatura */
   width: 100%; /* Ocupa toda a largura */
   height: 100%; /* Ocupa toda a altura */
   object-fit: cover; /* Faz a imagem preencher a área sem distorcer */
+  display: block;
 } /* Fecha a regra da imagem da receita */
 
 .recipe-tag { /* Etiqueta de categoria sobre a imagem */
