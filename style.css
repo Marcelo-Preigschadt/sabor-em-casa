@@ -159,6 +159,7 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
   border: 1px solid rgba(255, 255, 255, 0.55); /* Borda clara */
   box-shadow: var(--shadow); /* Sombra padrão */
   backdrop-filter: blur(10px); /* Efeito de vidro */
+
 } /* Fecha o grupo de cartões */
 
 .hero-copy { /* Bloco de texto do hero */
@@ -607,11 +608,13 @@ footer { /* Rodapé do site */
   overflow-y: auto; /* Ativa rolagem vertical se necessário */
   border-radius: 24px; /* Bordas arredondadas */
   position: relative; /* Permite posicionar o botão fechar */
+  
 } /* Fecha a regra da caixa da modal */
 
 .publish-content { /* Versão menor da modal de publicação */
-  width: min(700px, 100%); /* Limita a largura a 700px */
-  overflow: hidden;
+  width: min(700px, 100%);
+  max-height: 90vh;      /* limita altura */
+  overflow-y: auto;
 } /* Fecha a regra da modal de publicação */
 
 .modal-close { /* Botão de fechar a modal */

@@ -214,6 +214,7 @@ function abrirEditar(r) {
   document.getElementById("newVideo").value = r.video;
   document.getElementById("newIngredients").value = r.ingredientes || "";
   document.getElementById("newSteps").value = r.modo_preparo || "";
+  document.getElementById("newClass").value = r.turma || ""
   publishModal.classList.add("show");
 }
 
