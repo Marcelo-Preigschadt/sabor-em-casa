@@ -124,15 +124,20 @@ async function uploadImagem(file) {
 // CARREGAR RECEITAS
 // =========================================
 async function carregarReceitas() {
-  const { data } = await supabase.from("receitas").select("*");
+
+  // 🔥 ORDENA POR TURMA (ESSENCIAL)
+  const { data } = await supabase
+    .from("receitas")
+    .select("*")
+    .order("turma", { ascending: true });
 
   grid.innerHTML = "";
 
-  // 🔥 AGRUPA POR TURMA
+  // 🔥 AGRUPAMENTO
   const grupos = {};
 
   for (let r of data) {
-    const turma = r.turma || "Sem turma";
+    const turma = r.turma?.trim() || "Sem turma";
 
     if (!grupos[turma]) {
       grupos[turma] = [];
@@ -141,20 +146,18 @@ async function carregarReceitas() {
     grupos[turma].push(r);
   }
 
-  // 🔥 RENDERIZA POR TURMA
+  // 🔥 RENDERIZAÇÃO CORRETA
   for (let turma in grupos) {
 
-    // título da turma (só aparece se tiver receitas)
+    // TÍTULO DA TURMA
     const titulo = document.createElement("h2");
     titulo.innerText = "Turma " + turma;
+    titulo.style.gridColumn = "1 / -1";
     titulo.style.margin = "20px 0 10px";
-    titulo.style.gridColumn = "1 / -1"; // 🔥 ESSENCIAL
+
     grid.appendChild(titulo);
 
-    // container da turma
-    const container = document.createElement("div");
-    container.classList.add("turma-grid");
-
+    // CARDS
     for (let r of grupos[turma]) {
 
       const card = document.createElement("div");
@@ -175,7 +178,6 @@ async function carregarReceitas() {
         <button class="admin semana">⭐</button>
       `;
 
-      // 🔥 MANTÉM TODAS TUAS FUNÇÕES
       card.querySelector(".ver").onclick = () => abrirModal(r);
       card.querySelector(".editar").onclick = () => abrirEditar(r);
 
@@ -192,10 +194,8 @@ async function carregarReceitas() {
         carregarSemana();
       };
 
-      container.appendChild(card);
+      grid.appendChild(card);
     }
-
-    grid.appendChild(container);
   }
 
   atualizarUI();
