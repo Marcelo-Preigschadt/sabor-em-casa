@@ -176,7 +176,7 @@ async function carregarReceitas() {
           <button class="btn btn-primary ver">Ver</button>
           <button class="btn btn-secondary editar admin">Editar</button>
           <button class="btn btn-secondary excluir admin">Excluir</button>
-          <button class="btn btn-primary semana admin">⭐ Incluir Receita da Semana</button>
+          <button class="btn btn-seconday semana admin">⭐ Incluir Receita da Semana</button>
         </div>
       `;
 
@@ -189,12 +189,35 @@ async function carregarReceitas() {
       };
 
       card.querySelector(".semana").onclick = async () => {
-        await supabase.from("receitas").update({ destaque_semana: false });
-        await supabase.from("receitas")
-          .update({ destaque_semana: true })
-          .eq("id", r.id);
-        carregarSemana();
-      };
+
+  console.log("clicou:", r.id);
+
+  // 🔥 limpa TODOS MENOS O ATUAL
+  const { error: e1 } = await supabase
+    .from("receitas")
+    .update({ destaque_semana: false })
+    .neq("id", r.id);
+
+  if (e1) {
+    console.error("ERRO LIMPAR:", e1);
+    alert("Erro ao limpar destaque");
+    return;
+  }
+
+  // 🔥 marca o atual
+  const { error: e2 } = await supabase
+    .from("receitas")
+    .update({ destaque_semana: true })
+    .eq("id", r.id);
+
+  if (e2) {
+    console.error("ERRO SETAR:", e2);
+    alert("Erro ao definir destaque");
+    return;
+  }
+
+  carregarSemana();
+};
 
       grid.appendChild(card);
     }
