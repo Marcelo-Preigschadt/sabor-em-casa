@@ -294,7 +294,7 @@ publishForm.addEventListener("submit", async (e) => {
     ingredientes: newIngredients.value,
     modo_preparo: newSteps.value,
     autor: newAuthor.value,
-    turma: newClass.value
+    turma: newClass.value || "Sem turma"
   };
 
   // 🔥 só adiciona imagem se existir (não sobrescreve no update)
