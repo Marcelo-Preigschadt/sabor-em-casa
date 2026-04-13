@@ -172,10 +172,12 @@ async function carregarReceitas() {
           👤 ${r.autor || "Aluno"} — Turma ${r.turma || "-"}
         </p>
 
-        <button class="ver">Ver</button>
-        <button class="admin editar">Editar</button>
-        <button class="admin excluir">Excluir</button>
-        <button class="admin semana">⭐</button>
+        <div class="card-actions">
+          <button class="btn btn-primary ver">Ver</button>
+          <button class="btn btn-secondary editar admin">Editar</button>
+          <button class="btn btn-secondary excluir admin">Excluir</button>
+          <button class="btn btn-primary semana admin">⭐ Incluir Receita da Semana</button>
+        </div>
       `;
 
       card.querySelector(".ver").onclick = () => abrirModal(r);
