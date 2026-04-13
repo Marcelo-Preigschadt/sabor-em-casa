@@ -611,6 +611,7 @@ footer { /* Rodapé do site */
 
 .publish-content { /* Versão menor da modal de publicação */
   width: min(700px, 100%); /* Limita a largura a 700px */
+  overflow: hidden;
 } /* Fecha a regra da modal de publicação */
 
 .modal-close { /* Botão de fechar a modal */
@@ -628,9 +629,11 @@ footer { /* Rodapé do site */
 } /* Fecha a regra do botão fechar */
 
 .modal-image { /* Imagem grande da receita na modal */
-  width: 100%; /* Ocupa toda a largura */
-  height: 320px; /* Altura fixa */
-  object-fit: cover; /* Preenche a área sem distorcer */
+  width: 100%; /* Ocupa toda a largura */ 
+  max-height: 300px;   /* 🔥 limita altura */
+  object-fit: cover;   /* 🔥 corta proporcional */
+  display: block;
+  border-radius: 10px;
 } /* Fecha a regra da imagem da modal */
 
 .modal-body { /* Corpo interno da modal */
