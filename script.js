@@ -164,7 +164,9 @@ async function carregarReceitas() {
       card.classList.add("recipe-card");
 
       card.innerHTML = `
-        <img src="${r.imagem}">
+        <div class="recipe-thumb">
+          <img src="${r.imagem}">
+        </div>
         <h3>${r.titulo}</h3>
         <p>${r.descricao}</p>
 
@@ -173,12 +175,31 @@ async function carregarReceitas() {
         </p>
 
         <div class="card-actions">
-          <button class="btn btn-primary ver">Ver</button>
+          <button class="btn btn-primary ver">Ver Receita</button>
           <button class="btn btn-secondary editar admin">Editar</button>
           <button class="btn btn-secondary excluir admin">Excluir</button>
           <button class="btn btn-seconday semana admin">⭐ Incluir Receita da Semana</button>
         </div>
       `;
+      // 🔥 HOVER COM TROCA DE IMAGENS
+if (r.imagens && r.imagens.length > 1) {
+
+  let i = 0;
+  let interval;
+  const img = card.querySelector(".card-img");
+
+  card.addEventListener("mouseenter", () => {
+    interval = setInterval(() => {
+      i = (i + 1) % r.imagens.length;
+      img.src = r.imagens[i];
+    }, 800);
+  });
+
+  card.addEventListener("mouseleave", () => {
+    clearInterval(interval);
+    img.src = r.imagem;
+  });
+}
 
       card.querySelector(".ver").onclick = () => abrirModal(r);
       card.querySelector(".editar").onclick = () => abrirEditar(r);
@@ -247,9 +268,49 @@ function abrirEditar(r) {
 // MODAL RECEITA (CORREÇÃO DEFINITIVA)
 // =========================================
 function abrirModal(r) {
-  document.getElementById("modalTitle").innerText = r.titulo;
-  document.getElementById("modalDescription").innerText = r.descricao;
-  document.getElementById("modalImage").src = r.imagem;
+  // 🔥 GALERIA CORRIGIDA
+
+let galeria = document.getElementById("modalGaleria");
+
+if (!galeria) {
+  galeria = document.createElement("div");
+  galeria.id = "modalGaleria";
+
+  // 🔥 POSIÇÃO CORRETA (logo abaixo da imagem principal)
+  const modalImage = document.getElementById("modalImage");
+  modalImage.parentNode.insertBefore(galeria, modalImage.nextSibling);
+}
+
+// limpa
+galeria.innerHTML = "";
+
+// estilo correto
+galeria.style.display = "flex";
+galeria.style.gap = "10px";
+galeria.style.margin = "10px 0";
+galeria.style.overflowX = "auto";
+
+// cria miniaturas
+if (r.imagens && r.imagens.length > 0) {
+  for (let img of r.imagens) {
+
+    const thumb = document.createElement("img");
+    thumb.src = img;
+
+    thumb.style.width = "90px";
+    thumb.style.height = "70px";
+    thumb.style.objectFit = "cover";
+    thumb.style.borderRadius = "8px";
+    thumb.style.cursor = "pointer";
+
+    // 🔥 ESSENCIAL → troca imagem grande
+    thumb.onclick = () => {
+      document.getElementById("modalImage").src = img;
+    };
+
+    galeria.appendChild(thumb);
+  }
+}
   document.getElementById("modalIngredients").innerHTML =
   (r.ingredientes || "")
     .split("\n")
@@ -301,13 +362,15 @@ document.getElementById("modalSteps").innerHTML =
 publishForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const file = document.getElementById("newImage").files[0];
-  let imagem = null;
+  const files = document.getElementById("newImage").files;
+let imagens = [];
 
-  // só faz upload se realmente tiver imagem nova
-  if (file && file.size > 0) {
-    imagem = await uploadImagem(file);
+if (files.length > 0) {
+  for (let file of files) {
+    const url = await uploadImagem(file);
+    if (url) imagens.push(url);
   }
+}
 
   const dados = {
     titulo: newTitle.value,
@@ -323,9 +386,10 @@ publishForm.addEventListener("submit", async (e) => {
   };
 
   // 🔥 só adiciona imagem se existir (não sobrescreve no update)
-  if (imagem !== null) {
-    dados.imagem = imagem;
-  }
+  if (imagens.length > 0) {
+  dados.imagem = imagens[0]; // capa
+  dados.imagens = imagens;   // todas
+}
 
   if (editandoId) {
     await supabase

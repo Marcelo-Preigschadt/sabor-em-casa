@@ -374,6 +374,7 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
 
 .recipe-card { /* Cartão individual da receita */
   border-radius: 26px; /* Bordas arredondadas */
+  height: 100%;
   overflow: hidden; /* Esconde conteúdo que sair das bordas */
   transition: transform 0.28s ease, box-shadow 0.28s ease; /* Suaviza hover */
   display: flex; /* Usa flexbox */
@@ -413,13 +414,13 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
   font-weight: 800; /* Peso da fonte */
 } /* Fecha a regra da etiqueta */
 
-.recipe-body { /* Corpo interno do cartão */
-  padding: 22px; /* Espaçamento interno */
-  display: grid; /* Usa grid */
-  gap: 14px; /* Espaço entre elementos */
-  flex: 1; /* Faz essa área crescer para preencher o cartão */
-} /* Fecha a regra do corpo do cartão */
-
+.recipe-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
 .recipe-meta { /* Linha com meta informações da receita */
   display: flex; /* Usa flexbox */
   flex-wrap: wrap; /* Permite quebrar linha */
@@ -435,8 +436,12 @@ textarea { /* Seleciona botões, inputs, selects e textareas */
 } /* Fecha a regra do título */
 
 .recipe-desc { /* Descrição curta da receita */
-  color: var(--muted); /* Cor secundária */
-  font-size: 0.96rem; /* Tamanho da fonte */
+  color: var(--muted);
+  font-size: 0.96rem;
+  display: -webkit-box;
+   line-clamp: 3; /* 🔥 LIMITE DE LINHAS */
+   -webkit-box-orient: vertical;
+  overflow: hidden;
 } /* Fecha a regra da descrição */
 
 .video-placeholder { /* Bloco reservado para vídeo dentro do cartão */
@@ -925,9 +930,10 @@ body.logado #publishButton {
 /* BOTÕES DOS CARDS - EM COLUNA */
 .card-actions {
   display: flex;
-  flex-direction: column; /* 🔥 ESSENCIAL */
+  flex-direction: column;
   gap: 8px;
-  padding: 10px;
+  margin-top: auto; /* 🔥 EMPURRA PARA BAIXO */
+  padding-bottom: 10px;
 }
 
 /* todos ocupam largura total */
@@ -936,4 +942,11 @@ body.logado #publishButton {
   padding: 12px;
   font-size: 0.9rem;
   border-radius: 12px;
+}
+#modalImage {
+  width: 100%;
+  max-height: 300px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
