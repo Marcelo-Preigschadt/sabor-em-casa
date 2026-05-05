@@ -950,3 +950,126 @@ body.logado #publishButton {
   object-fit: contain;
   display: block;
 }
+/* ================= ELETIVA (SEM ALTERAR HTML) ================= */
+
+.eletiva-box {
+  width: min(92%, 1240px); /* 🔥 IGUAL ao container */
+  margin: 10px auto 10px auto; /* 🔥 centraliza e reduz espaço */
+
+  padding: 24px 28px;
+
+  border-radius: 16px;
+
+  background: #ffffff;
+
+  border-left: 6px solid #ff6b35;
+  border-right: 6px solid #ff6b35;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* BADGE */
+.eletiva-badge {
+  display: inline-block;
+
+  background: linear-gradient(135deg, #ff7a3d, #ff5e2b);
+  color: white;
+
+  font-size: 0.7rem;
+  font-weight: 800;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  margin-bottom: 12px;
+}
+
+/* TÍTULO */
+.eletiva-title {
+  font-size: 2rem;
+  font-weight: 800;
+
+  color: #2e1d13;
+
+  line-height: 1.25;
+
+  margin-bottom: 16px;
+}
+
+/* PARÁGRAFOS */
+.eletiva-text {
+  font-size: 1rem;
+  line-height: 1.7;
+
+  color: #5c4637;
+
+  text-align: justify;
+
+  margin-bottom: 14px;
+}
+
+/* PRIMEIRO PARÁGRAFO (DESTAQUE) */
+.eletiva-text:first-of-type {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #3a2417;
+}
+.eletiva-text:last-of-type {
+  margin-bottom: 6px;
+}
+
+/* DIVISOR */
+.eletiva-divider {
+  height: 1px;
+  margin: 18px 0;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 107, 53, 0.4),
+    transparent
+  );
+}
+
+/* TAGS (melhoria real visual) */
+.eletiva-tags {
+  margin-top: 18px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* MELHORAR CHIPS EXISTENTES */
+.eletiva-tags .chip {
+  background: #fff3e5;
+  border: 1px solid rgba(255, 183, 3, 0.3);
+
+  color: #7a4e2d;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  transition: 0.2s ease;
+}
+
+.eletiva-tags .chip:hover {
+  background: linear-gradient(135deg, #ff7a3d, #ff5e2b);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .eletiva-box {
+    padding: 22px;
+  }
+
+  .eletiva-title {
+    font-size: 1.6rem;
+  }
+}
