@@ -40,7 +40,12 @@ a { /* Seleciona todos os links */
   text-decoration: none; /* Remove o sublinhado padrão */
   color: inherit; /* Faz o link herdar a cor do elemento pai */
 } /* Fecha a regra dos links */
-
+p {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.7;
+  hyphens: auto;
+}
 button,
 input,
 select,
